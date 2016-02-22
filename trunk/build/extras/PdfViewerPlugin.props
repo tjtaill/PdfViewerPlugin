@@ -1,0 +1,33 @@
+plugin.pdfviewer.PdfViewerPlugin.activate=defer
+plugin.pdfviewer.PdfViewerPlugin.author=troy
+plugin.pdfviewer.PdfViewerPlugin.description=Pdf dockable viewer plugin.
+plugin.pdfviewer.PdfViewerPlugin.docs=docs/PdfViewerPlugin.html
+plugin.pdfviewer.PdfViewerPlugin.longdescription=description.html
+plugin.pdfviewer.PdfViewerPlugin.name=PdfViewerPlugin
+plugin.pdfviewer.PdfViewerPlugin.usePluginHome=true
+
+plugin.pdfviewer.PdfViewerPlugin.version=0.1
+
+plugin.pdfviewer.PdfViewerPlugin.depend.0=jdk 1.7.0
+plugin.pdfviewer.PdfViewerPlugin.depend.1=jedit 05.00.99.00
+
+# list needed jar dependencies
+plugin.pdfviewer.PdfViewerPlugin.jars=\
+    PDFRenderer-0.9.1.jar
+
+# Menu
+plugin.pdfviewer.PdfViewerPlugin.menu=\
+  pdf-viewer-show \
+  open-pdf \
+  pdfviewer-sync-pdf-location \
+  pdfviewer-sync-text-location
+
+
+pdf-viewer-show.label=Show Pdf Viewer
+open-pdf.label=Open Associated Pdf
+pdfviewer-sync-pdf-location.label=Sync Pdf Location
+icepdf-sync-text-location.label=Sync Text Location
+
+
+# Dockable
+pdf-viewer.title=Pdf Viewer

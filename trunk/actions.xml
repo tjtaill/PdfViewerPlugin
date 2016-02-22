@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE ACTIONS SYSTEM "actions.dtd">
+<ACTIONS>
+    <ACTION NAME="pdf-viewer-show">
+        <CODE>
+            wm.addDockableWindow("pdf-viewer");
+            wm.getDockableWindow("pdf-viewer").focus();
+        </CODE>
+    </ACTION>
+    <ACTION NAME="open-pdf">
+        <CODE>
+            wm.showDockableWindow("pdf-viewer");
+            pdfViewer = wm.getDockableWindow("pdf-viewer");
+            path = buffer.getPath().split("\\.")[0] + ".pdf";
+            pdfViewer.openPDF( path );
+            pdfViewer.focus();
+        </CODE>
+    </ACTION>
+    <ACTION NAME="pdfviewer-sync-pdf-location">
+        <CODE>
+            pdfViewer = wm.getDockableWindow("pdf-viewer");
+            pdfViewer.syncPdfLocation(textArea);
+        </CODE>
+    </ACTION>
+    <ACTION NAME="pdfviewer-sync-text-location">
+        <CODE>
+            pdfViewer = wm.getDockableWindow("pdf-viewer");
+            pdfViewer.syncTextLocation(textArea);
+        </CODE>
+    </ACTION>
+</ACTIONS>
