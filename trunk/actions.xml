@@ -28,4 +28,10 @@
             pdfViewer.syncTextLocation(textArea);
         </CODE>
     </ACTION>
+    <ACTION NAME="close-pdf">
+        <CODE>
+            pdfViewer = wm.getDockableWindow("pdf-viewer");
+            pdfViewer.closePDF();
+        </CODE>
+    </ACTION>
 </ACTIONS>

@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.*;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 import java.util.logging.Level;
@@ -60,6 +61,7 @@ import com.sun.pdfview.action.PDFAction;
 import org.gjt.sp.jedit.EBComponent;
 import org.gjt.sp.jedit.EBMessage;
 import org.gjt.sp.jedit.gui.DefaultFocusComponent;
+import sun.nio.ch.DirectBuffer;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -97,6 +99,7 @@ public class PDFViewer extends JPanel
 
     /** a thread that pre-loads the next page for faster response */
     PagePreparer pagePrep;
+    private ByteBuffer buf;
 
     /**
      * utility method to get an icon from the resources of this class
@@ -512,14 +515,13 @@ public class PDFViewer extends JPanel
         FileChannel channel = raf.getChannel();
 
         // now memory-map a byte-buffer
-        ByteBuffer buf =
-                channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+        buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
         openPDFByteBuffer(buf, file.getPath(), file.getName());
     }
 
     public void openPDF(String filePath) {
         try {
-            openFile( new File( filePath) );
+            openFile(new File(filePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -928,6 +930,8 @@ public class PDFViewer extends JPanel
         }
     }
 
+
+
     public void syncPdfLocation(org.gjt.sp.jedit.textarea.TextArea textArea) {
         int currentLine = textArea.getCaretLine();
         int lastLine = textArea.getLineCount();
@@ -946,6 +950,18 @@ public class PDFViewer extends JPanel
         float targetLine = percent * lines;
         int line = (int)Math.floor( targetLine );
         textArea.setCaretPosition(textArea.getLineStartOffset(line - 1));
+    }
+
+    public static void unmap(MappedByteBuffer buffer)
+    {
+        if (buffer == null) return;
+        sun.misc.Cleaner cleaner = ((DirectBuffer) buffer).cleaner();
+        cleaner.clean();
+    }
+
+    public void closePDF() {
+        doClose();
+        unmap((MappedByteBuffer) buf);
     }
 
 }

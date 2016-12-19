@@ -19,12 +19,14 @@ plugin.pdfviewer.PdfViewerPlugin.jars=\
 plugin.pdfviewer.PdfViewerPlugin.menu=\
   pdf-viewer-show \
   open-pdf \
+  close-pdf \
   pdfviewer-sync-pdf-location \
   pdfviewer-sync-text-location
 
 
 pdf-viewer-show.label=Show Pdf Viewer
 open-pdf.label=Open Associated Pdf
+close-pdf.label=Close Pdf
 pdfviewer-sync-pdf-location.label=Sync Pdf Location
 icepdf-sync-text-location.label=Sync Text Location
 
